@@ -7,8 +7,8 @@ from django.http import HttpResponse, JsonResponse
 
 from .utils import query_by_caption
 
-IMAGE_ROOT = Path("H:\Workspace\clip\images")
-
+# IMAGE_ROOT = Path("/home/nero/Courses/CS412/Image-Retrieval-Backend/images")
+# IMAGE_ROOT = Path("/home/nero/Courses/CS412/Image-Retrieval-Backend/images/testing_set")
 def index(request, caption, dist_func, num_images):
     print(caption)
     filenames = query_by_caption(caption)
@@ -19,11 +19,12 @@ def index(request, caption, dist_func, num_images):
 
 
 def get_image(request, image_name):
-    print("Get request")
-    print(image_name)
-    print(request)
+    image_name = image_name.replace('*', '/')
+    # print("Get request")
+    # print(image_name)
+    # print(request)
     try:
-        with open(IMAGE_ROOT / image_name, "rb") as f:
+        with open(image_name, "rb") as f:
             return HttpResponse(f.read(), content_type="image/jpg")
     except IOError:
         red = Image.new('RGBA', (1, 1), (255,0,0,0))
