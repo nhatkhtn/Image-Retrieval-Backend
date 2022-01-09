@@ -1,7 +1,7 @@
 import os
 from os import path
 import pandas as pd 
-
+import clip 
 from torch.utils.data.dataset import Dataset
 
 class DescriptionDataset(Dataset):
@@ -26,7 +26,7 @@ class DescriptionDataset(Dataset):
                 if len(curr_description) > 70:
                     curr_description = ' '.join(curr_description.split()[:70])
                 self.description.append({
-                    "description": curr_description,
+                    "description": clip.tokenize(curr_description)[0]    ,
                     "video_id": int(vid_id)
                 })
             except:
@@ -38,7 +38,7 @@ class DescriptionDataset(Dataset):
                         curr_description = ' '.join(curr_description.split()[:70])
                 
                     self.description.append({
-                        "description": curr_description,
+                        "description":  clip.tokenize(curr_description)[0]  ,
                         "video_id": int(vid_id)
                     })
                 except:
