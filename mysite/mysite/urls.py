@@ -21,6 +21,6 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('server/myapp/server/query_by_caption/<str:caption>/<str:dist_func>/<int:num_images>/', views.index),
     path('myapp/server/query_by_caption/<str:caption>/<str:dist_func>/<int:num_images>/', views.index),
-    path('server/LSC_Thumbnail/<str:image_name>', views.get_image),
+    path('myapp/server/LSC_Thumbnail/<str:image_name>', views.get_image),
     path('admin/', admin.site.urls),
 ]
